@@ -1,5 +1,7 @@
 Content will be covered on the basis of Categories:
-==================================================
+===================================================
+REF - https://docs.aws.amazon.com/
+
 Compute:
 --------
 1) Amazon EC2
@@ -17,3 +19,123 @@ Compute:
 
 Containers:
 -----------
+1) Amazon ECR
+2) Amazon ECS
+3) Amazon EKS
+4) AWS App2Container
+
+Storage:
+--------
+1) Amazon S3
+2) AWS Backup
+3) Amazon EBS
+4) Amazon EFS
+5) Amazon FSx
+6) Amazon S3 Glacier
+7) AWS Snow Family
+8) AWS Storage Gateway
+
+Networking & Content Delivery:
+------------------------------
+1) Amazon API Gateway
+2) AWS App Mesh
+3) AWS Cloud Map
+4) Amazon CloudFront
+5) AWS Direct Connect
+6) AWS Elastic Load Balancing
+7) AWS Global Accelerator
+8) Amazon Route 53
+9) Amazon VPC
+10) AWS VPN
+
+Database:
+---------
+1) Amazon Aurora
+2) Amazon DocumentDB
+3) Amazon DynamoDB
+4) Amazon ElastiCache
+5) Amazon Keyspaces (for Apache Cassandra)
+6) Amazon Neptune
+7) Amazon QLDB
+8) Amazon RDS
+9) Amazon Redshift
+
+Security, Identity, & Compliance:
+---------------------------------
+1) AWS Identity & Access Management (IAM)
+2) AWS Artifact
+3) Amazon Cognito
+4) Amazon Detective
+5) AWS Directory Service
+6) AWS Firewall Manager
+7) Amazon Cloud Directory
+8) Amazon GuardDuty
+9) Amazon Inspector
+10) Amazon Macie
+11) AWS Resource Access Manager (AWS RAM)
+12) AWS Resource Groups
+13) AWS Secrets Manager
+14) AWS Security Hub
+15) AWS Shield
+16) AWS Single Sign-On
+17) AWS Tag Editor
+18) AWS WAF
+
+Developer Tools:
+----------------
+1) AWS Cloud9
+2) AWS CodeArtifact
+3) AWS CodeBuild
+4) AWS CodeCommit
+5) AWS CodeDeploy
+6) AWS CodePipeline
+7) AWS CodeStar
+8) AWS Porting Assistant for .NET
+9) AWS Tools & SDKs
+10) AWS X-Ray
+
+Management & Governance:
+------------------------
+1) AWS AppConfig
+2) Auto Scaling
+3) AWS Chatbot
+4) AWS CloudFormation
+5) AWS CloudTrail
+6) Amazon CloudWatch
+7) AWS Command Line Interface (AWS CLI)
+8) AWS Compute Optimizer
+9) AWS Config
+10) AWS Control Tower
+11) Amazon Data Lifecycle Manager
+12) AWS Health
+13) AWS License Manager
+14) AWS Management Console
+15) AWS OpsWorks
+16) AWS Organizations
+17) AWS Service Catalog
+18) AWS Service Quotas
+19) AWS Systems Manager
+20) AWS Tools for Powershell
+21) AWS Trusted Advisor
+22) AWS Well-Architected Tool
+
+Application Integration:
+------------------------
+1) Amazon AppFlow
+2) Amazon EventBridge
+3) Amazon MQ
+4) Amazon SNS
+5) Amazon SQS
+6) AWS Step Functions
+7) Amazon SWF
+
+SDKs & Toolkits:
+----------------
+1) AWS Cloud Development Kit (AWS CDK)
+2) AWS Code Examples Repository
+3) AWS Command Line Interface (AWS CLI)
+4) AWS SDK for .NET
+5) AWS Toolkit for Visual Studio
+6) AWS Toolkit for Visual Studio Code
+7) AWS Tools for Powershell
+8) AWS Toolkit for Azure DevOps
