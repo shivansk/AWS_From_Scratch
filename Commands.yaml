@@ -9,12 +9,13 @@ $ terraform destroy
 // Configure multiple AWS account
 $ aws configure --profile account1
 $ aws configure --profile account2
+
 // example
-aws configure --profile AWSAcc
-AWS Access Key ID [None]: ********
-AWS Secret Access Key [None]: *********
-Default region name [None]: eu-west-1
-Default output format [None]: json
+$ aws configure --profile AWSAcc
+      AWS Access Key ID [None]: ********
+      AWS Secret Access Key [None]: *********
+      Default region name [None]: eu-west-1
+      Default output format [None]: json
 
 $ aws configure list
       Name                    Value             Type    Location
