@@ -27,5 +27,5 @@ secret_key     ****************R/OD shared-credentials-file
     
 $ aws configure list
 $ export AWS_DEFAULT_PROFILE=AWSAcc
-$ set AWS_DEFAULT_PROFILE=account1
+$ set AWS_DEFAULT_PROFILE=AWSAcc
 $ aws configure list
