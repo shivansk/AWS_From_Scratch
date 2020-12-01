@@ -61,3 +61,4 @@ aws cloudformation deploy --template 'file path to yaml you want to execute' --s
 aws ec2 describe-availability-zones
 aws cloudformation deploy --template /Users/template.yml  myteststack7  --parameter-overrides MyRegionMap=ami-00a205cb8e06c3c4e  MyEnvironmentMap=t2.small
 aws cloudformation deploy --template /Users/template.yml  myteststack8  --parameter-overrides ami-00a205cb8e06c3c4e
+aws cloudformation deploy --template template.yml --stack-name myteststack1 --parameter-overrides EnvironmentName=prod --capabilities CAPABILITY_NAMED_IAM
