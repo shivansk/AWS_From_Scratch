@@ -16,7 +16,7 @@ Description: This Template deploys a Kinesis Firehose for Splunk.
 Parameters:
   SplunkHecURL:
     Type: String
-    Default: 'https://atvp1lmslm2.intern.paysafecard.at:8088'  #'https://splunk.aqujesus.tech:8088'
+    Default: 'https://xyz.com:8088'  #
 
   SplunkHecToken:
     Type: String
