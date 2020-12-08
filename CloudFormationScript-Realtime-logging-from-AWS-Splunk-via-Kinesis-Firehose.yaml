@@ -5,14 +5,6 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: This Template deploys a Kinesis Firehose for Splunk.
 
-# Mapping of bucket names and regions
-# Mappings:
-#   BucketMap:
-#     eu-central-1:
-#       BucketName: eu-central-1-lambda
-#     eu-west-1:
-#       BucketName: eu-west-1-lambda
-
 Parameters:
   SplunkHecURL:
     Type: String
@@ -31,23 +23,6 @@ Parameters:
     Type: String
     Default: eu-west-1-lambda
   
-  # # zip file residing in 'BucketNameValue' has .js script for Lambda
-  # FileCode: # need to move the function.zip to S3 using CF
-  #   Type: String
-  #   Default: function.zip
-  
-  # FileCodeCWE:
-  #   Type: String
-  #   Default: splunk_cwe_firehose_processor_v0.3.zip
-  
-  # FileCodeCWL:
-  #   Type: String
-  #   Default: splunk_cwl_firehose_processor_v0.3.zip
-  
-  # FileCodeVPC:
-  #   Type: String
-  #   Default: splunk_vpc_firehose_processor_v0.3.zip
-
   LogGroupNameLabel:
     Type: String
     Default: VPCtoSplunkLogGroup2
@@ -63,14 +38,6 @@ Parameters:
   Workvalue:
     Type: String
     Default: -work02
-  
-  # FirehoseLambdaRoleName:
-  #   Type: String
-  #   Default: FirehoseLambdaRole2
-  
-  # FunctionLambda4FirehoseName:
-  #   Type: String
-  #   Default: FunctionLambda4Firehose
   
   FunctionLambda4FirehoseNameCWE:
     Type: String
@@ -97,12 +64,6 @@ Parameters:
   #   Default: WriteLambdaLogs2
 
 Resources:
-  # NestedCall:
-  #   Type: AWS::CloudFormation::Stack
-  #   Properties:
-  #     TemplateURL: https://1234********.amazonaws.com/s3cft.yml
-  #     TimeoutInMinutes: 60
-
   ### Firehose's work bucket
   S3BucketBkp:
     Type: 'AWS::S3::Bucket'
@@ -114,36 +75,6 @@ Resources:
           - !Ref 'Workvalue'
       VersioningConfiguration:
         Status: Enabled
-
-  ### Lambda Function Role + Inline policy for logs
-  # LambdaRole:
-  #   Type: 'AWS::IAM::Role'
-  #   Properties:
-  #     RoleName: !Ref FirehoseLambdaRoleName
-  #     AssumeRolePolicyDocument:
-  #       Version: 2012-10-17
-  #       Statement:
-  #         - Effect: Allow
-  #           Principal:
-  #             Service:
-  #             - lambda.amazonaws.com
-  #           Action:
-  #             - 'sts:AssumeRole'
-  #     Path: "/"
-  #     Policies:
-  #       - PolicyName: !Ref WriteLambdaLogsName
-  #         PolicyDocument:
-  #           Version: 2012-10-17
-  #           Statement:
-  #             - Effect: Allow
-  #               Action:
-  #                 - 'logs:CreateLogGroup'
-  #               Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*'
-  #             - Effect: Allow
-  #               Action:
-  #                 - 'logs:CreateLogStream'
-  #                 - 'logs:PutLogEvents'
-  #               Resource: !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${FunctionLambda4FirehoseName}'
 
   ### Firehose Role for Streams + Inline policy for the Role
   FireHoseRole:
@@ -199,42 +130,6 @@ Resources:
                   - !Sub 'arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/%FIREHOSE_POLICY_TEMPLATE_PLACEHOLDER%'
 
   ### Lambda Function that unzips files
-  # LambdaFunction:
-  #   Type: 'AWS::Lambda::Function'
-  #   Properties:
-  #     Description: "Function based in a Lambda blueprint to decompress zips"
-  #     FunctionName: !Ref FunctionLambda4FirehoseName
-  #     Handler: index.handler
-  #     Role: !GetAtt LambdaRole.Arn
-  #     Code:
-  #       S3Bucket:
-  #         Fn::FindInMap:
-  #           - BucketMap
-  #           - Ref: AWS::Region
-  #           - BucketName
-  #       S3Key: !Ref FileCode
-  #     Runtime: nodejs12.x
-  #     Timeout: 180
-  #     TracingConfig:
-  #       Mode: PassThrough
-  #   DependsOn:
-  #     - LambdaRole
-
-  ### Lambda Function that unzips files
-  # LambdaFunction:
-  #   Type: "AWS::Serverless::Function"
-  #   Properties:
-  #     Description: "Function based in a Lambda blueprint to decompress zips"
-  #     FunctionName: !Ref FunctionLambda4FirehoseName
-  #     CodeUri: ./src/CWE
-  #     Handler: lambda_function.handler
-  #     Runtime: nodejs12.x
-  #     Timeout: 180
-  #     Tracing: Active
-  #     Role: !GetAtt LambdaRole.Arn
-  #   DependsOn:
-  #     - LambdaRole
-  
   ### Firehose that sends VPC Flow logs to Splunk
   FHtoSplunk:
     Type: 'AWS::KinesisFirehose::DeliveryStream'
@@ -440,27 +335,7 @@ Resources:
   ##### CloudTrail Event #####
 
   ### Lambda Function that unzips files related to Cloudwatch Events(CWE)
-  # Source - Firehose Components - FireHose Processor - AWS::Lambda::Function       
-  # CWEFirehoseProcessor:
-  #   Type: AWS::Lambda::Function
-  #   Properties:
-  #     Code:
-  #       S3Bucket:
-  #         Fn::FindInMap:
-  #           - BucketMap
-  #           - Ref: AWS::Region
-  #           - BucketName
-  #       S3Key: !Ref FileCodeCWE
-  #     Description: Stream events from CloudWatch Events to Splunk using HTTP event collector
-  #     MemorySize: 512
-  #     Handler: lambda_function.handler
-  #     Role:
-  #       Fn::GetAtt:
-  #         - CWEFirehoseProcessorRole
-  #         - Arn
-  #     Timeout: 300
-  #     Runtime: python3.7
-      
+  # Source - Firehose Components - FireHose Processor - AWS::Lambda::Function      
   CWEFirehoseProcessorLambdaFunction:
     Type: "AWS::Serverless::Function"
     Properties:
@@ -643,25 +518,6 @@ Resources:
   ##### CWL #####
   ### Lambda Function that unzips logs related to Cloudwatch Logs(CWL)
   # Source - Firehose Components - FireHose Processor - AWS::Lambda::Function
-  # CWLFirehoseProcessor:
-  #   Type: AWS::Lambda::Function
-  #   Properties:
-  #     Code:
-  #       S3Bucket:
-  #         Fn::FindInMap:
-  #           - BucketMap
-  #           - Ref: AWS::Region
-  #           - BucketName
-  #       S3Key: !Ref FileCodeCWL
-  #     Description: Stream events from CloudWatch Logs to Splunk using HTTP event collector
-  #     MemorySize: 512
-  #     Handler: lambda_function.handler
-  #     Role:
-  #       Fn::GetAtt:
-  #         - CWLFirehoseProcessorRole
-  #         - Arn
-  #     Timeout: 300
-  #     Runtime: python3.7
   
   CWLFirehoseProcessorLambdaFunction:
     Type: "AWS::Serverless::Function"
@@ -846,25 +702,6 @@ Resources:
   ##### VPC #####
   ### Lambda Function that unzips logs related to VPC Flow Logs(VPC)
   # Source - Firehose Components - FireHose Processor - AWS::Lambda::Function
-  # VPCFirehoseProcessor:
-  #   Type: AWS::Lambda::Function
-  #   Properties:
-  #     Code:
-  #       S3Bucket:
-  #         Fn::FindInMap:
-  #           - BucketMap
-  #           - Ref: AWS::Region
-  #           - BucketName
-  #       S3Key: !Ref FileCodeVPC
-  #     Description: Stream events from VPC Flow Logs to Splunk using HTTP event collector
-  #     MemorySize: 512
-  #     Handler: lambda_function.handler
-  #     Role:
-  #       Fn::GetAtt:
-  #         - VPCFirehoseProcessorRole
-  #         - Arn
-  #     Timeout: 300
-  #     Runtime: python3.7
 
   VPCFirehoseProcessorLambdaFunction:
     Type: "AWS::Serverless::Function"
@@ -1003,10 +840,6 @@ Resources:
   ##### VPC #####
 
 Outputs:
-  # StackRef:
-  #   Value: !Ref NestedCall
-  # OutputFromNestedStack:
-  #   Value: !GetAtt NestedCall.Outputs.BucketName
   FireHoseRolName:
     Value: !Ref FireHoseRole
   FireHoseRolARN:
