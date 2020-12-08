@@ -1,5 +1,6 @@
 ############
 ### Cloudformation script to push realtime collect logs from VPC, cloudwatch Cloudwatch events into kinesis firehose and into Splunk for analysis ###
+### Does contiain code to implement AWS Serverless Application Model (SAM) for Lambda as well ###
 ############
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
