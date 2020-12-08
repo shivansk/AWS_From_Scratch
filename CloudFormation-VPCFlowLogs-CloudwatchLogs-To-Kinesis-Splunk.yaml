@@ -729,11 +729,11 @@ Resources:
             IntervalInSeconds: 300
             SizeInMBs: 1
         HECEndpointType: Event
-        HECToken: 6d4e5d57-4c93-46b7-a5d3-516eda4c39e6
+        HECToken: 1234-*****9e6
         HECAcknowledgmentTimeoutInSeconds: 180
         RetryOptions:
           DurationInSeconds: 300
-        HECEndpoint: https://atvp1lmslm2.intern.paysafecard.at:8088
+        HECEndpoint: https://xyz.com:8088
         S3BackupMode: FailedEventsOnly
         ProcessingConfiguration:
           Enabled: true
